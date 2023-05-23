@@ -22,6 +22,7 @@ import nhatph29877.fpoly.duanmau.Fragment.QuanLySach.QuanLySachFragment;
 import nhatph29877.fpoly.duanmau.Fragment.QuanLyThanhVien.QuanLyThanhVienFragment;
 import nhatph29877.fpoly.duanmau.Fragment.Top10muon.Top10muonSachNhieuNhatFragment;
 import nhatph29877.fpoly.duanmau.Fragment.quanlyloai.QuanLyLoaiFragment;
+import nhatph29877.fpoly.duanmau.databace.DBhelper;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerToggle.syncState();
         navigationView =findViewById(R.id.nav);
         navigationView.setNavigationItemSelectedListener(this);
+        DBhelper dBhelper=new DBhelper(getApplicationContext());
+        dBhelper.getWritableDatabase();
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(getApplicationContext(),"Đổi Mk",Toast.LENGTH_LONG).show();
                 break;
             case R.id.dangxuat:
-                System.exit(0);
+            default:
                 Toast.makeText(getApplicationContext(),"Đăng xuất",Toast.LENGTH_LONG).show();
                 break;
         }

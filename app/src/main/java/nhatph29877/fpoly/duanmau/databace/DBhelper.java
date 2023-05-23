@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class DBhelper  extends SQLiteOpenHelper {
     public DBhelper(Context context) {
-        super(context, "DB_GHICHU", null, 1);
+        super(context, "data", null, 1);
     }
 
     @Override
@@ -29,7 +29,6 @@ public class DBhelper  extends SQLiteOpenHelper {
                 " tenloai TEXT)";
         db.execSQL(loaisach);
 
-
         String sach = "CREATE TABLE sach(masach INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " tensach TEXT," +
                 "giamuon TEXT NOT NULL,"+
@@ -45,6 +44,10 @@ public class DBhelper  extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS phieumuon");
+        db.execSQL("DROP TABLE IF EXISTS thanhvien");
+        db.execSQL("DROP TABLE IF EXISTS loaisach");
+        db.execSQL("DROP TABLE IF EXISTS masach");
+        db.execSQL("DROP TABLE IF EXISTS Thuthu");
     }
 }
