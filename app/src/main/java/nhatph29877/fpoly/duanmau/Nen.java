@@ -33,7 +33,7 @@ public class Nen extends AppCompatActivity {
                 }
             }
         };
-        t.schedule(tt,0,100);
+        t.schedule(tt,0,200);
 
     }
     }

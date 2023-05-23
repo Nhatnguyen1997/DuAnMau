@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Nen">
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:src="@drawable/watting1"
+    <ImageView
+        android:src="@drawable/a"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <ProgressBar

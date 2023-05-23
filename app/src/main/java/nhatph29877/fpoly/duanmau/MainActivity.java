@@ -3,12 +3,14 @@ package nhatph29877.fpoly.duanmau;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,7 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 import nhatph29877.fpoly.duanmau.Fragment.DoanhThu.DoanhThuFragment;
-import nhatph29877.fpoly.duanmau.Fragment.Doimk.DoimkFragment;
+import nhatph29877.fpoly.duanmau.Fragment.DoiMatKhau.DoiMatKhau;
 import nhatph29877.fpoly.duanmau.Fragment.PhieuMuon.PhieuMuonFragment;
 import nhatph29877.fpoly.duanmau.Fragment.QuanLySach.QuanLySachFragment;
 import nhatph29877.fpoly.duanmau.Fragment.QuanLyThanhVien.QuanLyThanhVienFragment;
@@ -76,15 +78,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.close();
                 Toast.makeText(getApplicationContext(),"doanh thu",Toast.LENGTH_LONG).show();
                 break;
-            case R.id.doimk:
-                repleaceFragment(DoimkFragment.newInstance());
+            case R.id.add_user:
+                setTitle("Thêm Thành Viên");
+                repleaceFragment(new QuanLyThanhVienFragment());
                 drawerLayout.close();
-                Toast.makeText(getApplicationContext(),"Đổi Mk",Toast.LENGTH_LONG).show();
                 break;
-            case R.id.dangxuat:
-            default:
-                Toast.makeText(getApplicationContext(),"Đăng xuất",Toast.LENGTH_LONG).show();
+            case R.id.change_password:
+                setTitle("Đổi Mật Khẩu");
+                repleaceFragment(new DoiMatKhau());
+                drawerLayout.close();
                 break;
+            case R.id.log_out:
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+                alertDialog.setMessage("Bạn có muốn đăng xuất hay không");
+                alertDialog.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        MainActivity.super.onBackPressed();
+                    }
+                });
+                alertDialog.show();
+
+
+                break;
+
         }
         return true;
     }

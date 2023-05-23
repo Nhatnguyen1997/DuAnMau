@@ -32,17 +32,30 @@
 </menu>
     </item>
     <item
-        android:title="người dùng">
-        <menu>
+        android:title="Người Dùng"
 
+        >
+        <menu>
             <item
-                android:id="@+id/doimk"
-                android:icon="@drawable/baseline_key_24"
-                android:title="Đổi mật khẩu"></item>
-ổi          <item
-            android:id="@+id/dangxuat"
-            android:icon="@drawable/baseline_login_24"
-                android:title="Đăng xuất"></item>
+                android:id="@+id/add_user"
+                android:title="Thêm Người Dùng"
+                android:icon="@drawable/baseline_person_add_24"
+                >
+
+            </item>
+            <item
+                android:id="@+id/change_password"
+                android:title="Đổi Mật Khẩu"
+                android:icon="@drawable/baseline_vpn_key_24"
+                ></item>
+            <item
+                android:id="@+id/log_out"
+                android:title="Đăng Xuất"
+                android:icon="@drawable/baseline_logout_24"
+                >
+
+            </item>
         </menu>
     </item>
+
 </menu>
