@@ -40,7 +40,7 @@ public class DoimkFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_doi__mat__khau_, container, false);
+        View view = inflater.inflate(R.layout.fragment_doi_mat_khau, container, false);
         showmkcu = view.findViewById(R.id.dmk_showmkcu);
         showmkm = view.findViewById(R.id.dmk_showmkmoi);
         shownlmk = view.findViewById(R.id.dmk_shownlmkm);

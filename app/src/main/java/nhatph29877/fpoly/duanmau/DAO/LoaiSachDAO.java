@@ -42,7 +42,7 @@ public class LoaiSachDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put("TenLS",loaiSach.getTenls());
 
-        return  sqLiteDatabase.update("loaisach",contentValues,"MaLS = ?",new String[]{String.valueOf(loaiSach.getMals())});
+        return  sqLiteDatabase.update("loaisach",contentValues,"maLS = ?",new String[]{String.valueOf(loaiSach.getMals())});
     }
     public long XoaLS(int MaLS){
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();

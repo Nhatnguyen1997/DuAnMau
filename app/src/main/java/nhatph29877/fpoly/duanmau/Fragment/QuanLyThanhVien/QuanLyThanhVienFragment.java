@@ -117,6 +117,7 @@ public class QuanLyThanhVienFragment extends Fragment {
                         Toast.makeText(getContext(), "Thêm Thất Bại", Toast.LENGTH_SHORT).show();
                     }
                 }
+                alertDialog.dismiss();
             }
         });
         btthemthoattv.setOnClickListener(new View.OnClickListener() {

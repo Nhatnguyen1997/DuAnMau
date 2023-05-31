@@ -6,20 +6,33 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.QuanLyThanhVien.QuanLyThanhVienFragment">
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quản lý Thành Viên"
+        android:textSize="20dp"
+        android:paddingLeft="100dp"
+        android:background="#52EC74"
+        android:layout_margin="10dp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qltv_recycquanly"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
         android:layout_height="500dp"/>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/qltv_btnfloatingtv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="300dp"
-        android:src="@drawable/baseline_post_add_24"
-        app:backgroundTint="@android:color/holo_green_light" />
-
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/baseline_post_add_24" />
+    </RelativeLayout>
 </LinearLayout>

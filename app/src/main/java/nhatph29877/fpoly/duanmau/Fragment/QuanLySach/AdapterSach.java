@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,7 @@ public class AdapterSach extends RecyclerView.Adapter<AdapterSach.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        EditText masach, tensach, giathue, loaisach;
+        TextView masach, tensach, giathue, loaisach;
         ImageButton suasach, xoasach;
         LinearLayout llsach;
 
@@ -99,7 +100,9 @@ public class AdapterSach extends RecyclerView.Adapter<AdapterSach.ViewHolder> {
               else {
                   Toast.makeText(context, "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
               }
+
             }
+
         });
 
 
@@ -177,7 +180,7 @@ public class AdapterSach extends RecyclerView.Adapter<AdapterSach.ViewHolder> {
                         Toast.makeText(context, "Cập Nhật Thất Bại", Toast.LENGTH_SHORT).show();
                     }
                 }
-
+                alertDialog.dismiss();
             }
         });
         btnthoatsach.setOnClickListener(new View.OnClickListener() {

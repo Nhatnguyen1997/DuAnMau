@@ -13,32 +13,20 @@ public class DBhelper  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String thuthu = "CREATE TABLE Thuthu(matt INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " matkhau TEXT," +
-                " hoten TEXT)";
-        db.execSQL(thuthu);
-
-
-        String thanhvien = "CREATE TABLE thanhvien(matv INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " tentv TEXT," +
-                " macancuoc INTEGER)";
-        db.execSQL(thanhvien);
-
-
-        String loaisach = "CREATE TABLE loaisach(maloai INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " tenloai TEXT)";
-        db.execSQL(loaisach);
-
-        String sach = "CREATE TABLE sach(masach INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " tensach TEXT," +
-                "giamuon TEXT NOT NULL,"+
-                "maloai INTEGER NOT NULL REFERENCES loaisach(maloai))";
-        db.execSQL(sach);
-        String phieumuon = "CREATE TABLE phieumuon(maphieumuon INTEGER PRIMARY KEY AUTOINCREMENT," +
-                " matv INTEGER NOT NULL REFERENCES thanhvien(matv)," +
-                "masach INTEGER NOT NULL REFERENCES sach(masach),"+
-                "maloai INTEGER NOT NULL REFERENCES loaisach(maloai))";
-        db.execSQL(phieumuon);
+        String bangthanhvien = "CREATE TABLE thanhvien(MaTV integer primary key autoincrement ,TenTV text NOT NULL,CCCD integer UNIQUE NOT NULL)";
+        db.execSQL(bangthanhvien);
+        String bangloaisach = "CREATE TABLE loaisach(MaLS integer primary key autoincrement,TenLS text UNIQUE NOT NULL)";
+        db.execSQL(bangloaisach);
+        String bangsach = "CREATE TABLE sach(MaS integer primary key autoincrement,TenS text  NOT NULL,Giathue integer NOT NULL," +
+                "TenLS text NOT NULL REFERENCES loaisach(TenLS))";
+        db.execSQL(bangsach);
+        String bangphieumuon = "CREATE TABLE phieumuon(MaPM integer primary key autoincrement,ngaythue text ,trangthai text ," +
+                "TenTV text  REFERENCES thanhvien(TenTV)," +
+                "TenS text  REFERENCES sach(TenS)," +
+                "GiathueS integer  REFERENCES sach(GiathueS)  )";
+        db.execSQL(bangphieumuon);
+        String bangthuthu = "CREATE TABLE thuthu(MaTT integer primary key autoincrement,TenTT text NOT NULL )";
+        db.execSQL(bangthuthu);
 
     }
 

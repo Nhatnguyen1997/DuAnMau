@@ -49,7 +49,7 @@ public class ThanhVienDAO {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("TenTV", thanhVien.getTentv());
-        contentValues.put("CCCD", thanhVien.getCccd());
+        contentValues.put("macancuoc", thanhVien.getCccd());
 
         return sqLiteDatabase.update("thanhvien", contentValues, "MaTV = ?", new String[]{String.valueOf(thanhVien.getMatv())});
     }
