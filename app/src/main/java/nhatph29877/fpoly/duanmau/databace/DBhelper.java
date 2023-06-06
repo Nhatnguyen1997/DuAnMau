@@ -23,10 +23,12 @@ public class DBhelper  extends SQLiteOpenHelper {
         String bangphieumuon = "CREATE TABLE phieumuon(MaPM integer primary key autoincrement,ngaythue text ,trangthai text ," +
                 "TenTV text  REFERENCES thanhvien(TenTV)," +
                 "TenS text  REFERENCES sach(TenS)," +
-                "GiathueS integer  REFERENCES sach(GiathueS)  )";
+                "Giathue integer  REFERENCES sach(Giathue) ,TenTT text REFERENCES thuthu(TenTT),MaS integer REFERENCES sach(MaS) )";
         db.execSQL(bangphieumuon);
-        String bangthuthu = "CREATE TABLE thuthu(MaTT integer primary key autoincrement,TenTT text NOT NULL )";
+        String bangthuthu = "CREATE TABLE thuthu(MaTT text primary key ,TenTT text  ,matkhau text )";
         db.execSQL(bangthuthu);
+        String them = "INSERT INTO thuthu VALUES('admin','ngoctring','1234')";
+        db.execSQL(them);
 
     }
 

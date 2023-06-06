@@ -1,7 +1,10 @@
 package nhatph29877.fpoly.duanmau.Fragment.PhieuMuon;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +49,8 @@ public class PhieuMuonFragment extends Fragment {
     AdapterPhieuMuon adapterPhieuMuon;
     ArrayList<HashMap<String, Object>> listspinnertv;
     ArrayList<HashMap<String, Object>> listspinnertensach;
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
 
     public PhieuMuonFragment() {
         // Required empty public constructor
@@ -118,7 +124,7 @@ public class PhieuMuonFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-    public void ThemPhieuMuon(){
+    public void ThemPhieuMuon() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialogpm_themphieumuon, null);
@@ -129,6 +135,7 @@ public class PhieuMuonFragment extends Fragment {
         CheckBox themtrangthai = view.findViewById(R.id.dialogpm_themtrangthai);
         Button themphieumuon = view.findViewById(R.id.dialogpm_btnthempm);
         Button themthoatphieumuon = view.findViewById(R.id.dialogpm_btnthoatthempm);
+        initPreferences();
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -140,66 +147,63 @@ public class PhieuMuonFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month + 1;
-                        String date = dayOfMonth+"/"+month+"/"+year;
+                        String date = dayOfMonth + "/" + month + "/" + year;
                         themngaythue.setText(date);
                     }
-                },year,month,day);
+                }, year, month, day);
                 datePickerDialog.show();
             }
         });
         builder.setView(view);
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-        SimpleAdapter adapterthemten = new SimpleAdapter(getContext(),listspinnertv,android.R.layout.simple_list_item_1,
-                new String[]{"TenTV"},new int[]{android.R.id.text1});
+        SimpleAdapter adapterthemten = new SimpleAdapter(getContext(), listspinnertv, android.R.layout.simple_list_item_1,
+                new String[]{"TenTV"}, new int[]{android.R.id.text1});
         themtentv.setAdapter(adapterthemten);
-        SimpleAdapter adapterthemsach = new SimpleAdapter(getContext(),listspinnertensach, android.R.layout.simple_list_item_1,
-                new String[]{"TenS"},new int[]{android.R.id.text1});
+        SimpleAdapter adapterthemsach = new SimpleAdapter(getContext(), listspinnertensach, android.R.layout.simple_list_item_1,
+                new String[]{"TenS"}, new int[]{android.R.id.text1});
         themtensach.setAdapter(adapterthemsach);
 
         themphieumuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String trangthai = "" ;
-                if(themtrangthai.isChecked() == true) {
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("DATA", MODE_PRIVATE);
+                String tentt = sharedPreferences.getString("DATATEN", "");
+                String trangthai = "";
+                if (themtrangthai.isChecked() == true) {
                     trangthai = "Đã Trả Sách";
-                }
-                else if(themtrangthai.isChecked() == false) {
+
+                } else if (themtrangthai.isChecked() == false) {
                     trangthai = "Chưa Trả Sách";
+
                 }
                 String themgaythuesach = themngaythue.getText().toString();
                 String giasach = themgiasach.getText().toString();
-                if(themngaythue.length() == 0){
+                if (themngaythue.length() == 0) {
                     themngaythue.requestFocus();
                     themngaythue.setError("Không bỏ trống ngày thuê");
-                }
-
-                else{
-                    HashMap<String,Object> chontentv = (HashMap<String, Object>) themtentv.getSelectedItem();
-                    HashMap<String,Object> chontensach = (HashMap<String, Object>) themtensach.getSelectedItem();
+                } else {
+                    HashMap<String, Object> chontentv = (HashMap<String, Object>) themtentv.getSelectedItem();
+                    HashMap<String, Object> chontensach = (HashMap<String, Object>) themtensach.getSelectedItem();
                     String tentv = (String) chontentv.get("TenTV");
                     String tensach = (String) chontensach.get("TenS");
-                    PhieuMuon themphieumuon = new PhieuMuon(themgaythuesach, trangthai,tentv,tensach,Integer.parseInt(giasach));
-                    if(phieuMuonDAO.Thempm(themphieumuon) > 0){
+                    PhieuMuon themphieumuon = new PhieuMuon(themgaythuesach, trangthai, tentv, tensach, Integer.parseInt(giasach),tentt);
+                    if (phieuMuonDAO.Thempm(themphieumuon) > 0) {
                         Toast.makeText(getContext(), "Thêm Thành Công", Toast.LENGTH_SHORT).show();
                         realoandata();
-                    }
-                    else {
+                        alertDialog.dismiss();
+                    } else {
                         Toast.makeText(getContext(), "Thêm Thất Bại", Toast.LENGTH_SHORT).show();
                     }
 
 
                 }
-                alertDialog.dismiss();
             }
         });
-        themthoatphieumuon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-
     }
+    private void initPreferences() {
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        editor = sharedPreferences.edit();
+    }
 }

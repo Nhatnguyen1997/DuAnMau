@@ -29,14 +29,29 @@
         android:layout_marginBottom="20dp"
 
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/custome_listview"
+        android:weightSum="5">
     <EditText
         android:id="@+id/slogin_mkdangnhap"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint=" Mật khẩu"
-        android:background="@drawable/custome_listview"
+        android:layout_weight="4"
+
         android:inputType="textPassword"
         />
+    <ImageButton
+        android:id="@+id/slogin_showmk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_toEndOf="@id/slogin_mkdangnhap"
+        android:src="@drawable/hidepassword" />
+    </LinearLayout>
     <CheckBox
         android:id="@+id/slogin_luudp"
         android:layout_marginTop="10dp"

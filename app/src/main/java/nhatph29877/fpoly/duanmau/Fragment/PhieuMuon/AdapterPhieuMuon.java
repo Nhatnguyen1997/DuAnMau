@@ -1,11 +1,15 @@
 package nhatph29877.fpoly.duanmau.Fragment.PhieuMuon;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +41,8 @@ public class AdapterPhieuMuon extends RecyclerView.Adapter<AdapterPhieuMuon.View
     Context context;
     ArrayList<HashMap<String, Object>> listspinnertv;
     ArrayList<HashMap<String, Object>> listspinnertensach;
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences;
 
     public AdapterPhieuMuon(ArrayList<PhieuMuon> listpm, PhieuMuonDAO phieuMuonDAO, Context context,
                             ArrayList<HashMap<String, Object>> listspinnertv,
@@ -145,6 +151,7 @@ public class AdapterPhieuMuon extends RecyclerView.Adapter<AdapterPhieuMuon.View
         CheckBox suatrangthai = view.findViewById(R.id.dialogpm_suatrangthai);
         Button suaphieumuon = view.findViewById(R.id.dialogpm_btnsuapm);
         Button thoatphieumuon = view.findViewById(R.id.dialogpm_btnthoatsuapm);
+        initPreferences();
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -169,19 +176,39 @@ public class AdapterPhieuMuon extends RecyclerView.Adapter<AdapterPhieuMuon.View
         SimpleAdapter adaptersuaten = new SimpleAdapter(context, listspinnertv, android.R.layout.simple_list_item_1,
                 new String[]{"TenTV"}, new int[]{android.R.id.text1});
         suatentv.setAdapter(adaptersuaten);
+        int indextv = 0;
+        int vitritv = -1;
+        for(HashMap<String,Object> itemtv : listspinnertv){
+            if(itemtv.get("TenTV").equals(phieuMuon.getTentv()) ){
+                indextv = vitritv;
+            }
+            indextv++;
+        }
+
+        suatentv.setSelection(indextv);
         SimpleAdapter adaptersuasach = new SimpleAdapter(context, listspinnertensach, android.R.layout.simple_list_item_1,
                 new String[]{"TenS"}, new int[]{android.R.id.text1});
         suatensach.setAdapter(adaptersuasach);
-
-
+        int indexts = 0;
+        int vitrits = -1;
+        for(HashMap<String,Object> itemtv : listspinnertensach){
+            if(itemtv.get("TenS").equals(phieuMuon.getTens()) ){
+                indexts = vitrits;
+            }
+            indexts++;
+        }
+        suatensach.setSelection(indexts);
         suagiathue.setText(String.valueOf(phieuMuon.getGiathue()));
         suangaythue.setText(phieuMuon.getNgaythue());
+
 
         suaphieumuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = context.getSharedPreferences("DATA", MODE_PRIVATE);
+                String tentt = sharedPreferences.getString("DATATEN","");
                 String suangaythuesach = suangaythue.getText().toString();
-
+                int giathue = Integer.parseInt(suagiathue.getText().toString());
                 if (suangaythue.length() == 0) {
                     suangaythue.requestFocus();
                     suangaythue.setError("Không bỏ trống ngày thuê");
@@ -197,7 +224,7 @@ public class AdapterPhieuMuon extends RecyclerView.Adapter<AdapterPhieuMuon.View
                     } else if (suatrangthai.isChecked() == false) {
                         trangthaisua = "Chưa Trả Sách";
                     }
-                    PhieuMuon suaphieumuon = new PhieuMuon(maphieumuon, suangaythuesach, trangthaisua, tentv, tensach, 2000);
+                    PhieuMuon suaphieumuon = new PhieuMuon(suangaythuesach, trangthaisua, tentv, tensach,giathue ,tentt);
                     if (phieuMuonDAO.Suapm(suaphieumuon) > 0) {
                         Toast.makeText(context, "Cập Nhật Thành Công", Toast.LENGTH_SHORT).show();
                         listpm.clear();
@@ -220,6 +247,11 @@ public class AdapterPhieuMuon extends RecyclerView.Adapter<AdapterPhieuMuon.View
             }
         });
 
+    }
+    private void initPreferences() {
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = sharedPreferences.edit();
     }
 
 

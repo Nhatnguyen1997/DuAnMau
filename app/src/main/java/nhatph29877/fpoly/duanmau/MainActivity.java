@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import nhatph29877.fpoly.duanmau.Fragment.DoanhThu.DoanhThuFragment;
 import nhatph29877.fpoly.duanmau.Fragment.DoiMatKhau.DoiMatKhau;
+import nhatph29877.fpoly.duanmau.Fragment.Doimk.DoimkFragment;
 import nhatph29877.fpoly.duanmau.Fragment.PhieuMuon.PhieuMuonFragment;
 import nhatph29877.fpoly.duanmau.Fragment.QuanLySach.QuanLySachFragment;
 import nhatph29877.fpoly.duanmau.Fragment.QuanLyThanhVien.QuanLyThanhVienFragment;
@@ -36,10 +37,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.tollbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.id_drawer);
+        navigationView =findViewById(R.id.nav);
+        Bundle check = getIntent().getExtras();
+        boolean taikhoandn = check.getBoolean("thanhvien");
+        if (taikhoandn == true) {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.menu_user);
+        } else if (taikhoandn == false) {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.menu_nav);
+        }
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout,toolbar,
                 0,0);
         drawerToggle.syncState();
-        navigationView =findViewById(R.id.nav);
+
         navigationView.setNavigationItemSelectedListener(this);
         DBhelper dBhelper=new DBhelper(getApplicationContext());
         dBhelper.getWritableDatabase();
@@ -85,7 +96,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.change_password:
                 setTitle("Đổi Mật Khẩu");
-                repleaceFragment(new DoiMatKhau());
+                DoimkFragment fmDoiMatkhau = new DoimkFragment();
+
+                Bundle data = getIntent().getExtras();
+                fmDoiMatkhau.setArguments(data);
+
+                repleaceFragment(fmDoiMatkhau);
                 drawerLayout.close();
                 break;
             case R.id.log_out:

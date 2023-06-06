@@ -1,4 +1,4 @@
-package quannkph29999.fpoly.du_an_mau_quannkph29999.DAO;
+package nhatph29877.fpoly.duanmau.DAO;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,19 +9,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import quannkph29999.fpoly.du_an_mau_quannkph29999.DataBase.DBHelper;
-import quannkph29999.fpoly.du_an_mau_quannkph29999.Model.Sach;
-import quannkph29999.fpoly.du_an_mau_quannkph29999.Model.TopBook;
+import nhatph29877.fpoly.duanmau.Model.Sach;
+import nhatph29877.fpoly.duanmau.Model.TopBook;
+import nhatph29877.fpoly.duanmau.databace.DBhelper;
+
 
 public class ThongKeDAO {
-    private DBHelper dbHelper;
+    private DBhelper dbHelper;
     private Context context;
     private SQLiteDatabase db;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public ThongKeDAO(Context context) {
         this.context = context;
-        dbHelper = new DBHelper(context);
+        dbHelper = new DBhelper(context);
         db = dbHelper.getWritableDatabase();
     }
     @SuppressLint("Range")
@@ -41,7 +42,7 @@ public class ThongKeDAO {
     }
     @SuppressLint("Range")
     public int getDoanhThu(String tuNgay, String denNgay){
-        String sqlDoanhThu = "SELECT SUM(GiathueS) as doanhThu FROM phieumuon WHERE ngaythue BETWEEN ? AND ?";
+        String sqlDoanhThu = "SELECT SUM(Giathue) as doanhThu FROM phieumuon WHERE ngaythue BETWEEN ? AND ?";
         List<Integer> list = new ArrayList<>();
         Cursor cursor = db.rawQuery(sqlDoanhThu,new String[]{tuNgay,denNgay});
         while (cursor.moveToNext()){

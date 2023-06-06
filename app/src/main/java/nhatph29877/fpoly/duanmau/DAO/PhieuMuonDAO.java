@@ -39,15 +39,25 @@ public class PhieuMuonDAO {
 
     }
 
+    private static final String COLUMN_NGAYTHUE = "ngaythue";
+    private static final String COLUMN_TRANGTHAI = "trangthai";
+    private static final String COLUMN_TEN_TV = "TenTV";
+    private static final String COLUMN_TEN_SACH = "TenS";
+    private static final String COLUMN_GIA_THUE_SACH = "Giathue";
+    private static final String COLUMN_TEN_THU_THU = "TenTT";
+    private static final String COLUMN_MA_SACH = "MaS";
+
+
     public long Thempm(PhieuMuon phieuMuon) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("ngaythue", phieuMuon.getNgaythue());
-        contentValues.put("trangthai", phieuMuon.getTrangthai());
-        contentValues.put("TenTV", phieuMuon.getTentv());
-        contentValues.put("TenS", phieuMuon.getTens());
-        contentValues.put("GiathueS", phieuMuon.getGiathue());
-
+        contentValues.put(COLUMN_NGAYTHUE, phieuMuon.getNgaythue());
+        contentValues.put(COLUMN_TRANGTHAI, phieuMuon.getTrangthai());
+        contentValues.put(COLUMN_TEN_TV, phieuMuon.getTentv());
+        contentValues.put(COLUMN_TEN_SACH, phieuMuon.getTens());
+        contentValues.put(COLUMN_GIA_THUE_SACH, phieuMuon.getGiathue());
+        contentValues.put(COLUMN_TEN_THU_THU,phieuMuon.getTentt());
+        contentValues.put(COLUMN_MA_SACH,phieuMuon.getMas());
         return sqLiteDatabase.insert("phieumuon", null, contentValues);
 
     }
@@ -60,7 +70,8 @@ public class PhieuMuonDAO {
         contentValues.put("TenTV", phieuMuon.getTentv());
         contentValues.put("TenS", phieuMuon.getTens());
         contentValues.put("GiathueS", phieuMuon.getGiathue());
-
+        contentValues.put("TenTT",phieuMuon.getTentt());
+        contentValues.put("MaS",phieuMuon.getMas());
         return sqLiteDatabase.update("phieumuon", contentValues, "MaPM = ?", new String[]{String.valueOf(phieuMuon.getMapm())});
     }
 

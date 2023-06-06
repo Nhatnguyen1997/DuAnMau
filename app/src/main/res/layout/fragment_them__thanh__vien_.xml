@@ -62,22 +62,27 @@
         android:layout_marginTop="5dp"
         android:text="Mật Khẩu:"
         android:textStyle="bold" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_gravity="center_horizontal">
     <EditText
         android:id="@+id/themtv_matkhaudk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:layout_weight="4"
         android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/showmkdk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="360dp"
-        android:layout_marginTop="-50dp"
+        android:layout_weight="1"
         android:src="@drawable/showpassword" />
-
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,11 +90,17 @@
         android:layout_marginTop="5dp"
         android:text="Nhập Lại Mật Khẩu:"
         android:textStyle="bold" />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_gravity="center_horizontal">
     <EditText
         android:id="@+id/themtv_nhaplaimkdk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="4"
         android:inputType="textPassword"
         android:textStyle="bold" />
 
@@ -97,25 +108,27 @@
         android:id="@+id/shownhaplaimkdk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="360dp"
-        android:layout_marginTop="-50dp"
+        android:layout_weight="1"
         android:src="@drawable/showpassword" />
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
     <Button
         android:id="@+id/themtv_btndangky"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:text="Đăng ký" />
 
     <Button
         android:id="@+id/themtv_btnshowds"
-        android:layout_marginTop="-50dp"
-        android:layout_marginLeft="230dp"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Xem DS" />
-
+    </LinearLayout>
 
 </LinearLayout>
